@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-accent: #FF6B00;
+  --color-accent-hover: #FF8C33;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --card: #141414;
+  --card2: #1a1a1a;
+  --border: rgba(255,107,0,0.15);
+  --text: #ffffff;
+  --text-muted: rgba(255,255,255,0.6);
+  --input-bg: #2a2a2a;
+  --input-border: rgba(255,255,255,0.25);
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --glow: 0 0 15px rgba(255,107,0,0.2);
+  --header-bg: rgba(10,10,10,0.85);
+}
+
+[data-theme="light"] {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --card2: #f0f0f2;
+  --border: rgba(230,92,0,0.2);
+  --text: #111111;
+  --text-muted: #444444;
+  --input-bg: #ffffff;
+  --input-border: rgba(0,0,0,0.3);
+  --shadow: 0 8px 32px rgba(0,0,0,0.1);
+  --glow: 0 0 15px rgba(230,92,0,0.2);
+  --header-bg: rgba(245,245,247,0.88);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer utilities {
+  .glass {
+    background: var(--header-bg);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+.form-input, .form-select, .form-textarea {
+  background: var(--input-bg);
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  padding: 0.6rem 0.875rem;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  width: 100%;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.2);
+}
+
+.form-select option { 
+  background: var(--card); 
+  color: var(--text); 
+}
+
+.form-textarea { 
+  resize: vertical; 
+  min-height: 120px; 
+  line-height: 1.6; 
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent !important;
+}
+
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder {
+  color: transparent !important;
+}
+
+input:focus::-moz-placeholder,
+textarea:focus::-moz-placeholder {
+  color: transparent !important;
+}
+
+input:focus:-ms-input-placeholder,
+textarea:focus:-ms-input-placeholder {
+  color: transparent !important;
+}
+
+/* Hide SVG icons within a focused relative wrapper */
+.relative:focus-within svg.absolute {
+  opacity: 0;
+  transition: opacity 0.1s;
+  pointer-events: none;
+}
+
+/* Restore normal padding when the icon is hidden */
+.relative:focus-within input.pl-10 {
+  padding-left: 0.875rem !important;
+}
+
+/* Hide native browser icons in inputs upon focus */
+input[type="search"]:focus::-webkit-search-cancel-button {
+  display: none !important;
+  opacity: 0 !important;
+}
+
